@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3058921621571527283}
+  - component: {fileID: 787198712540210526}
   m_Layer: 5
   m_Name: Card Holder
   m_TagString: Untagged
@@ -38,6 +39,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &787198712540210526
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104024376749098491}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1769954171113416446
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3cab7002798ee4b98062751bee7feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasGroup: {fileID: 787198712540210526}
   BackCard: {fileID: 7876975363488389854}
   FaceCard: {fileID: 4065100284021261238}
 --- !u!1 &4722901012708730163

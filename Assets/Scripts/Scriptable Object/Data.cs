@@ -10,16 +10,16 @@ namespace Davanci
     {
         private const string FileName = "Data";
 
-        private static Data instance;
-        public static Data Instance
+        private static Data Instance;
+        public static Data m_Instance
         {
             get
             {
-                if (instance == null)
+                if (Instance == null)
                 {
-                    instance = Resources.Load<Data>(FileName);
+                    Instance = Resources.Load<Data>(FileName);
                 }
-                return instance;
+                return Instance;
             }
         }
         public Sprite[] Sprites;

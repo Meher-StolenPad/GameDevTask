@@ -9,15 +9,23 @@ namespace Davanci
 {
     public class Card : MonoBehaviour
     {
+        [SerializeField] private CanvasGroup CanvasGroup;
         [SerializeField] private Image BackCard;
         [SerializeField] private Image FaceCard;
 
-        private int Id;
-
+        private int id;
+            
         internal void Init(int _id, Sprite _face)
         {
-            Id = _id;
+            id = _id;
             FaceCard.sprite = _face;
+        }
+        internal void DisableCard()
+        {
+            id = -1;
+            CanvasGroup.alpha = 0;
+            CanvasGroup.interactable = false;
+            CanvasGroup.blocksRaycasts = false;
         }
     }
 

@@ -7,61 +7,74 @@ namespace Davanci
 {
     public class CardsGenerator : MonoBehaviour
     {
-        [SerializeField] private Card cardPrefab; // Prefab for the card object
+        [SerializeField] private Card CardPrefab; // Prefab for the card object
         [Range(2, 10)]
-        [SerializeField] private int rows = 2;
+        [SerializeField] private int Rows = 2;
         [Range(2, 10)]
-        [SerializeField] private int columns = 3;
+        [SerializeField] private int Columns = 3;
 
-        [SerializeField] private List<Card> cards;
+        [SerializeField] private List<Card> Cards;
 
-        [SerializeField] private GridLayoutGroup gridLayout;
+        [SerializeField] private GridLayoutGroup GridLayout;
 
-        private Sprite[] spritesToUse;
+        private Sprite[] SpritesToUse;
         private int[] IconIdexArray;
+
         private void CalculateLayout()
         {
-            RectTransform parentRect = gridLayout.transform as RectTransform;
+            RectTransform parentRect = GridLayout.transform as RectTransform;
             Vector2 availableSize = new Vector2(parentRect.rect.width, parentRect.rect.height);
 
             // Ensure all cards are square
             float minDimension = Mathf.Min(availableSize.x, availableSize.y);
-            float cellSize = minDimension * 0.9f / Mathf.Max(rows, columns);
+            float cellSize = minDimension * 0.9f / Mathf.Max(Rows, Columns);
 
             // Calculate spacing
-            float spacingX = (columns > 1) ? (availableSize.x - (cellSize * columns)) / columns : 0;
-            float spacingY = (rows > 1) ? (availableSize.y - (cellSize * rows)) / rows : 0;
+            float spacingX = (Columns > 1) ? (availableSize.x - (cellSize * Columns)) / Columns : 0;
+            float spacingY = (Rows > 1) ? (availableSize.y - (cellSize * Rows)) / Rows : 0;
 
-            gridLayout.cellSize = new Vector2(cellSize, cellSize);
-            gridLayout.spacing = new Vector2(spacingX, spacingY);
+            GridLayout.cellSize = new Vector2(cellSize, cellSize);
+            GridLayout.spacing = new Vector2(spacingX, spacingY);
         }
         private void CreateCards(int rows, int columns)
         {
             CalculateLayout();
 
-            if (cards != null)
+            if (Cards != null)
             {
-                foreach (Card card in cards)
+                foreach (Card card in Cards)
                 {
                     Destroy(card.gameObject);
                 }
             }
             int cellCount = rows * columns;
 
-            cards = new List<Card>();
+            Cards = new List<Card>();
 
-            spritesToUse = Database.GetSprites(cellCount);
+            SpritesToUse = Database.GetSprites(cellCount);
             CreateIconsArray(cellCount);
             int indexInArray = 0;
+
+            int? middleCell = (cellCount) % 2 == 0 ? null : ((cellCount) / 2);
 
             for (int i = 0; i < cellCount; i++)
             {
                 // Instantiate a new card
-                Card newCard = Instantiate(cardPrefab, gridLayout.transform);
+                Card newCard = Instantiate(CardPrefab, GridLayout.transform);
+                Cards.Add(newCard);
+
                 int iconIndex = IconIdexArray[indexInArray];
-                newCard.Init(iconIndex, spritesToUse[iconIndex]);
-                cards.Add(newCard);
-                indexInArray++;
+
+                if (!CheckMiddleCell(middleCell, i))
+                {
+                    newCard.Init(iconIndex, SpritesToUse[iconIndex]);
+                    indexInArray++;
+                }
+                else
+                {
+                    newCard.DisableCard();
+                }
+
             }
         }
         private void CreateIconsArray(int count)
@@ -76,15 +89,22 @@ namespace Davanci
             IconIdexArray = IconIdexArray.SelectMany(x => Enumerable.Repeat(x, 2)).ToArray();
             IconIdexArray.Shuffle();
         }
+        private bool CheckMiddleCell(int? middleCell, int i)
+        {
+            if (middleCell == null) return false;
+
+            if (middleCell.Value == i) return true;
+            else return false;
+        }
         private void Start()
         {
-            CreateCards(rows, columns);
+            CreateCards(Rows, Columns);
         }
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                CreateCards(rows, columns);
+                CreateCards(Rows, Columns);
             }
         }
     }
