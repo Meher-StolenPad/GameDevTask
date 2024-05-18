@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 namespace Davanci
 {
-    public class CardsGenerator : MonoBehaviour
+    public class CardsGenerator : SingletonMB<CardsGenerator>
     {
         [SerializeField] private Card CardPrefab; // Prefab for the card object
         [Range(2, 10)]
@@ -102,8 +103,10 @@ namespace Davanci
         }
         #endregion
 
-        private void Start()
+        internal void InitCardsGenerator(Vector2Int dimension)
         {
+            Rows = dimension.x;
+            Columns = dimension.y;
             CreateCards(Rows, Columns);
         }
         private void Update()

@@ -29,6 +29,16 @@ namespace Davanci
         {
             return Levels.m_Instance.LevelsDimension;
         }
+        public static Vector2Int GetLevelDimension(int level)
+        {
+            if (level > Levels.m_Instance.LevelsDimension.Length) return Vector2Int.zero;
+
+            return Levels.m_Instance.LevelsDimension[level];
+        }
+        internal static bool HasLevel(int level)
+        {
+            return level < Levels.m_Instance.LevelsDimension.Length;
+        }
     }
 
 }

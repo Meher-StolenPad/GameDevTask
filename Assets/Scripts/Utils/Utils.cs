@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -26,7 +27,23 @@ namespace Davanci
         public static void SetTextAnimated(this TextMeshProUGUI _textMeshProUGUI, string _text)
         {
             _textMeshProUGUI.text = _text;
-            _textMeshProUGUI.transform.DOPunchScale(Vector3.one * 0.3f, 0.3f);
+            _textMeshProUGUI.rectTransform.DOPunchScale(Vector3.one * 0.3f, 0.3f);
+        }
+        public static IEnumerator FadeIn(this CanvasGroup canvasGroup, float duration)
+        {
+            yield return canvasGroup.DOFade(1f, duration).OnComplete(() =>
+            {
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+            }).WaitForCompletion();
+        }
+        public static IEnumerator FadeOut(this CanvasGroup canvasGroup, float duration)
+        {
+            yield return canvasGroup.DOFade(0f, duration).OnComplete(() =>
+            {
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
+            }).WaitForCompletion();
         }
         public static void OnHover(this RectTransform _rectTransform)
         {

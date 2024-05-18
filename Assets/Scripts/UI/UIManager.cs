@@ -10,6 +10,9 @@ namespace Davanci
         [SerializeField] private TextMeshProUGUI MovesCountText;
         [SerializeField] private TextMeshProUGUI MatchCountText;
 
+        [Header("Tap to start Panel")]
+        [SerializeField] private CanvasGroup TapToStartPanel;
+
         private void Start()
         {
             GameManager.OnTick += OnTick;
@@ -34,6 +37,11 @@ namespace Davanci
         private void SetTime(int time)
         {
             TimeText.SetTimeText(time);
+        }
+        public void OnTapToStartClicked()
+        {
+            StartCoroutine(TapToStartPanel.FadeOut(0.3f));
+            GameManager.OnGameStartedCallback?.Invoke();
         }
         private void OnDisable()
         {

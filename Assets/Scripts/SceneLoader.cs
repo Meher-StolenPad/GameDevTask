@@ -15,8 +15,6 @@ namespace Davanci
         {
             CanvasGroup.DOFade(1f, 0.5f).OnComplete(() =>
             {
-                DOTween.Kill(CanvasGroup);
-                DOTween.KillAll();
                 SceneManager.LoadSceneAsync(Database.GameSceneIndex).completed += OnGameSceneLoaded;
             });
         }
@@ -24,19 +22,22 @@ namespace Davanci
         {
             CanvasGroup.DOFade(1f, 0.5f).OnComplete(() =>
             {
-                DOTween.Kill(CanvasGroup);
-                DOTween.KillAll();
-
                 SceneManager.LoadSceneAsync(Database.LevelsMenuSceneIndex).completed += OnLevelSelectionSceneLoaded;
             });
         }
         private void OnGameSceneLoaded(AsyncOperation operation)
         {
-            FadeOut();
+            if(operation.isDone)
+            {
+                FadeOut();
+            }
         }
         private void OnLevelSelectionSceneLoaded(AsyncOperation operation)
         {
-            FadeOut();
+            if (operation.isDone)
+            {
+                FadeOut();
+            }
         }
 
         private void FadeOut(float duration = 1f)
