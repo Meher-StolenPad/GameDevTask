@@ -3,6 +3,12 @@ using UnityEngine;
 
 namespace Davanci
 {
+    public struct LevelCompletedData
+    {
+        public string Grade;
+        public int MovesCount;
+        public int Time;    
+    }
     public class GameManager : SingletonMB<GameManager>
     {
         private const float DelayBetweenCards = 0.1f;
@@ -10,9 +16,10 @@ namespace Davanci
         #region Callback Region
         internal static Action OnGameStartedCallback;
         internal static Action<Card> OnCardFlippedCallback;
-        internal static Action<int> OnTick;
+        internal static Action<int> OnTickCallback;
         internal static Action<int, bool> OnMoveCallback;
         internal static Action<int> OnCardMatchedCallback;
+        internal static Action<LevelCompletedData> OnLevelCompletedCallback;
 
         #endregion
 
@@ -28,6 +35,9 @@ namespace Davanci
 
         private Vector2Int LevelDimension;
         private int MatchCountNeeded;
+
+        private LevelCompletedData LevelCompletedData;
+
         #endregion
 
         private void OnEnable()
@@ -75,6 +85,40 @@ namespace Davanci
                 _card2.HideCard();
             }
             OnMoveCallback?.Invoke(MovesCount, _isMatch);
+
+            CheckLevelCompleted();
+        }
+        public string CalculateScore()
+        {
+            int baseScore = 80;
+            int movePenalty = (MovesCount - MatchCount) * 5;
+
+            int timeNeeded = LevelDimension.x * LevelDimension.y * 2;
+
+            int timePenalty = TimeSinceStarted > timeNeeded ? Mathf.FloorToInt((TimeSinceStarted - timeNeeded) / 10f) * 3 : -20;
+
+            int totalScore = baseScore + -movePenalty - timePenalty;
+
+            return Database.CalculateGrade(totalScore);
+        }
+        private void CheckLevelCompleted()
+        {
+            if (MatchCount >= MatchCountNeeded)
+            {
+                LevelCompletedData.MovesCount = MovesCount;
+                LevelCompletedData.Time = TimeSinceStarted;
+                LevelCompletedData.Grade = CalculateScore();
+
+                OnLevelCompletedCallback?.Invoke(LevelCompletedData);
+                IsGameStarted = false;
+                OnGameStopped();
+            }
+        }
+        private void OnGameStopped()
+        {
+            TimeSinceStarted = 0;
+            MatchCount = 0;
+            MovesCount = 0;
         }
         private void OnGameStarted()
         {
@@ -89,7 +133,7 @@ namespace Davanci
             {
                 timeSinceLastTick -= 1f;
                 TimeSinceStarted++;
-                OnTick?.Invoke(TimeSinceStarted);
+                OnTickCallback?.Invoke(TimeSinceStarted);
             }
         }
         private void OnDisable()

@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -10,16 +11,27 @@ namespace Davanci
         [SerializeField] private TextMeshProUGUI MovesCountText;
         [SerializeField] private TextMeshProUGUI MatchCountText;
 
-        [Header("Tap to start Panel")]
+        [Header("Start Panel")]
         [SerializeField] private CanvasGroup TapToStartPanel;
+
+        [Header("Level Completed Panel")]
+        [SerializeField] private CanvasGroup LevelCompletedCanvasGroup;
+        [SerializeField] private TextMeshProUGUI TotalMovesCountText;
+        [SerializeField] private TextMeshProUGUI TotalTimeText;
+        [SerializeField] private TextMeshProUGUI GradeText;
 
         private void Start()
         {
-            GameManager.OnTick += OnTick;
+            GameManager.OnTickCallback += OnTick;
             GameManager.OnCardMatchedCallback += OnCardMatched;
             GameManager.OnMoveCallback += OnCardMoved;
+            GameManager.OnLevelCompletedCallback += OnLevelCompleted;
         }
-
+        public void OnTapToStartClicked()
+        {
+            StartCoroutine(TapToStartPanel.FadeOut(0.3f));
+            GameManager.OnGameStartedCallback?.Invoke();
+        }
         private void OnCardMoved(int count, bool match)
         {
             MovesCountText.SetTextAnimated(count.ToString());
@@ -38,14 +50,31 @@ namespace Davanci
         {
             TimeText.SetTimeText(time);
         }
-        public void OnTapToStartClicked()
+
+        private void OnLevelCompleted(LevelCompletedData levelCompletedData)
         {
-            StartCoroutine(TapToStartPanel.FadeOut(0.3f));
-            GameManager.OnGameStartedCallback?.Invoke();
+            StartCoroutine(LevelCompletedCoroutine(levelCompletedData));
+        }
+        private IEnumerator LevelCompletedCoroutine(LevelCompletedData levelCompletedData)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            yield return LevelCompletedCanvasGroup.FadeIn(0.3f);
+
+            yield return TotalTimeText.SetAnimatedTimeText(levelCompletedData.Time, 0.5f);
+
+            yield return TotalMovesCountText.SetAnimatedIntText(levelCompletedData.MovesCount, 0.5f);
+
+            GradeText.text = levelCompletedData.Grade;
+
+            yield return GradeText.BounceAsync(0.3f, false);
         }
         private void OnDisable()
         {
-            GameManager.OnTick -= OnTick;
+            GameManager.OnTickCallback -= OnTick;
+            GameManager.OnCardMatchedCallback -= OnCardMatched;
+            GameManager.OnMoveCallback -= OnCardMoved;
+            GameManager.OnLevelCompletedCallback -= OnLevelCompleted;
         }
     }
 

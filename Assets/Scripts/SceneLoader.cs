@@ -29,7 +29,7 @@ namespace Davanci
 
             DOTween.KillAll();
 
-            SceneManager.LoadSceneAsync(Database.GameSceneIndex).completed += OnGameSceneLoaded;
+            SceneManager.LoadSceneAsync(Database.m_GameSceneIndex).completed += OnGameSceneLoaded;
         }
         internal void LoadLevelsMenuScene()
         {
@@ -45,7 +45,7 @@ namespace Davanci
 
             DOTween.KillAll();
 
-            SceneManager.LoadSceneAsync(Database.LevelsMenuSceneIndex).completed += OnLevelSelectionSceneLoaded;
+            SceneManager.LoadSceneAsync(Database.m_LevelsMenuSceneIndex).completed += OnLevelSelectionSceneLoaded;
         }
         private void OnGameSceneLoaded(AsyncOperation operation)
         {

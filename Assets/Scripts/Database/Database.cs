@@ -1,13 +1,23 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Davanci
 {
     public static class Database
     {
-        private static Sprite[] NewSprites;
-        public static int LevelsMenuSceneIndex = 0;
-        public static int GameSceneIndex = 1;
+        public static int m_LevelsMenuSceneIndex = 0;
+        public static int m_GameSceneIndex = 1;
 
+        private static Sprite[] NewSprites;
+        private static readonly Dictionary<int, string> GradeThresholds = new Dictionary<int, string>
+        {
+            { 90, "S" },
+            { 75, "A" },
+            { 50, "B" },
+            { 30, "C" },
+            { 10, "D" },
+            { 0,  "F" }
+        };
         public static Sprite[] GetSprites(int cellsize)
         {
             if (cellsize == 0) return null;
@@ -38,6 +48,17 @@ namespace Davanci
         internal static bool HasLevel(int level)
         {
             return level < Levels.m_Instance.LevelsDimension.Length;
+        }
+        public static string CalculateGrade(int score)
+        {
+            foreach (var threshold in GradeThresholds)
+            {
+                if (score >= threshold.Key)
+                {
+                    return threshold.Value;
+                }
+            }
+            return "F";
         }
     }
 
