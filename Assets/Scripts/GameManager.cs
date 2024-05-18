@@ -5,6 +5,8 @@ namespace Davanci
 {
     public class GameManager : SingletonMB<GameManager>
     {
+        private const float DelayBetweenCards = 0.1f;
+
         internal static Action<Card> OnCardFlippedCallback;
 
         private void OnEnable()
@@ -21,7 +23,8 @@ namespace Davanci
         {
             if (_isMatch)
             {
-                Debug.Log("Match !");
+                _card1.CollectCard();
+                _card2.CollectCard(DelayBetweenCards);
             }
             else
             {

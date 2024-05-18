@@ -13,9 +13,10 @@ namespace Davanci
         [Range(2, 10)]
         [SerializeField] private int Columns = 3;
 
-        [SerializeField] private List<Card> Cards;
-
+        [SerializeField] private List<Card> Cards = new List<Card>();
         [SerializeField] private GridLayoutGroup GridLayout;
+        [SerializeField] private RectTransform DiscardPile;
+
 
         private Sprite[] SpritesToUse;
         private int[] IconIdexArray;
@@ -50,13 +51,15 @@ namespace Davanci
             }
             int cellCount = rows * columns;
 
-            Cards = new List<Card>();
 
             SpritesToUse = Database.GetSprites(cellCount);
+
             CreateIconsArray(cellCount);
-            int indexInArray = 0;
+
 
             int? middleCell = (cellCount) % 2 == 0 ? null : ((cellCount) / 2);
+
+            int indexInArray = 0;
 
             for (int i = 0; i < cellCount; i++)
             {
@@ -68,7 +71,7 @@ namespace Davanci
 
                 if (!CheckMiddleCell(middleCell, i))
                 {
-                    newCard.Init(iconIndex, SpritesToUse[iconIndex]);
+                    newCard.Init(iconIndex, SpritesToUse[iconIndex], DiscardPile);
                     indexInArray++;
                 }
                 else

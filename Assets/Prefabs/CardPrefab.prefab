@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3cab7002798ee4b98062751bee7feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IsCollected: 0
   CanvasGroup: {fileID: 787198712540210526}
   CardHolder: {fileID: 3058921621571527283}
   BackCardImage: {fileID: 4065100284021261238}

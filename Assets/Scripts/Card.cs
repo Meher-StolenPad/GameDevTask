@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ namespace Davanci
 {
     public class Card : MonoBehaviour, IComparable<Card>
     {
+        public bool m_IsCollected;
+            
         [SerializeField] private CanvasGroup CanvasGroup;
         [SerializeField] private RectTransform CardHolder;
         [SerializeField] private Image BackCardImage;
@@ -14,6 +17,7 @@ namespace Davanci
 
         private int Id;
         private bool CardState;
+        private RectTransform DiscardPile;  
 
         public int CompareTo(Card other)
         {
@@ -21,10 +25,11 @@ namespace Davanci
                 return 1;
             return Id.CompareTo(other.Id);
         }
-        internal void Init(int _id, Sprite _face)
+        internal void Init(int _id, Sprite _face, RectTransform _discardPile)
         {
             Id = _id;
             FaceCardImage.sprite = _face;
+            DiscardPile = _discardPile;
         }
         internal void DisableCard()
         {
@@ -63,6 +68,19 @@ namespace Davanci
                     CardState = false;
                 });
             });
+        }
+        internal void CollectCard(float delay = 0f)
+        {
+            CardHolder.transform.SetParent(DiscardPile);
+
+            CardHolder.DOLocalRotate(Vector3.forward * 360f, 0.5f, RotateMode.LocalAxisAdd).SetDelay(delay).SetEase(Ease.InBack);
+            CardHolder.DOAnchorPos(Vector2.zero, 0.5f).SetEase(Ease.InBack).SetDelay(delay).OnComplete(() =>
+            {
+                CanvasGroup.interactable = false;
+                CanvasGroup.blocksRaycasts = false;
+                HideCard();
+            });
+            m_IsCollected = true;
         }
     }
 
