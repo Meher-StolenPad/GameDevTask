@@ -1,14 +1,11 @@
 using DG.Tweening;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Davanci
 {
-    public class Card : MonoBehaviour
+    public class Card : MonoBehaviour, IComparable<Card>
     {
         [SerializeField] private CanvasGroup CanvasGroup;
         [SerializeField] private RectTransform CardHolder;
@@ -18,6 +15,12 @@ namespace Davanci
         private int Id;
         private bool CardState;
 
+        public int CompareTo(Card other)
+        {
+            if (other == null)
+                return 1;
+            return Id.CompareTo(other.Id);
+        }
         internal void Init(int _id, Sprite _face)
         {
             Id = _id;
@@ -45,13 +48,13 @@ namespace Davanci
                 FaceCardImage.gameObject.SetActive(true);
                 CardHolder.DOLocalRotate(Vector3.up * 180f, 0.3f, RotateMode.Fast).OnComplete(() =>
                 {
-                    HideCard();
+                    GameManager.OnCardFlippedCallback?.Invoke(this);
                 });
             });
         }
         internal void HideCard()
         {
-            CardHolder.DOLocalRotate(Vector3.up * 90f, 0.3f, RotateMode.Fast).SetDelay(2f).OnComplete(() =>
+            CardHolder.DOLocalRotate(Vector3.up * 90f, 0.3f, RotateMode.Fast).OnComplete(() =>
             {
                 BackCardImage.gameObject.SetActive(true);
                 FaceCardImage.gameObject.SetActive(false);

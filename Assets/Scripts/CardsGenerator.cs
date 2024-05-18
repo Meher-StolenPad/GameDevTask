@@ -20,6 +20,7 @@ namespace Davanci
         private Sprite[] SpritesToUse;
         private int[] IconIdexArray;
 
+        #region Cards Generation
         private void CalculateLayout()
         {
             RectTransform parentRect = GridLayout.transform as RectTransform;
@@ -96,6 +97,8 @@ namespace Davanci
             if (middleCell.Value == i) return true;
             else return false;
         }
+        #endregion
+
         private void Start()
         {
             CreateCards(Rows, Columns);
