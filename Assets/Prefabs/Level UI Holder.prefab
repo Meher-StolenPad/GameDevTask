@@ -198,6 +198,7 @@ MonoBehaviour:
   Level: 0
   LevelText: {fileID: 1857793561}
   LevelHolderContainer: {fileID: 7583052885389979979}
+  LevelUIImage: {fileID: 4410830392905219682}
 --- !u!114 &3790634899349731777
 MonoBehaviour:
   m_ObjectHideFlags: 0
