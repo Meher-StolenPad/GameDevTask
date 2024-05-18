@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System;
-using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,23 +7,52 @@ namespace Davanci
 {
     public class Card : MonoBehaviour, IComparable<Card>
     {
+        #region Public variables Region
         public bool m_IsCollected;
-            
+        #endregion
+
+        #region Serialzed Variable Region
         [SerializeField] private CanvasGroup CanvasGroup;
         [SerializeField] private RectTransform CardHolder;
         [SerializeField] private Image BackCardImage;
         [SerializeField] private Image FaceCardImage;
 
+        #endregion
+
+        #region Private Variable Region
         private int Id;
         private bool CardState;
-        private RectTransform DiscardPile;  
+        private RectTransform DiscardPile;
+        #endregion
 
+        #region Comparer Region
         public int CompareTo(Card other)
         {
             if (other == null)
                 return 1;
             return Id.CompareTo(other.Id);
         }
+        #endregion
+
+        #region UI Functions
+        //function called from UI
+        public void OnCardClicked()
+        {
+            if (CardState) return;
+            ShowCard();
+        }
+        public void OnHover()
+        {
+            if (CardState) return;
+            CardHolder.DOLocalRotate(Vector3.forward * 5f, 0.2f, RotateMode.Fast);
+        }
+        public void OnUnHover()
+        {
+            if (CardState) return;
+            CardHolder.DOLocalRotate(Vector3.zero, 0.2f, RotateMode.Fast);
+        }
+        #endregion
+
         internal void Init(int _id, Sprite _face, RectTransform _discardPile)
         {
             Id = _id;
@@ -38,13 +66,8 @@ namespace Davanci
             CanvasGroup.interactable = false;
             CanvasGroup.blocksRaycasts = false;
         }
-        //function called from UI
-        public void OnCardClicked()
-        {
-            if (CardState) return;
-            ShowCard();
-        }
-        public void ShowCard()
+
+        internal void ShowCard()
         {
             CardState = true;
             CardHolder.DOLocalRotate(Vector3.up * 90f, 0.3f, RotateMode.Fast).OnComplete(() =>
@@ -57,6 +80,7 @@ namespace Davanci
                 });
             });
         }
+
         internal void HideCard()
         {
             CardHolder.DOLocalRotate(Vector3.up * 90f, 0.3f, RotateMode.Fast).OnComplete(() =>
@@ -82,6 +106,7 @@ namespace Davanci
             });
             m_IsCollected = true;
         }
+
     }
 
 }
