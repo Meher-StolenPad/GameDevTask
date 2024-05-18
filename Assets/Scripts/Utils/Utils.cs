@@ -23,10 +23,18 @@ namespace Davanci
 
             _textMeshProUGUI.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
         }
-        public static void SetTextAnimated(this TextMeshProUGUI textMeshProUGUI, string text)
+        public static void SetTextAnimated(this TextMeshProUGUI _textMeshProUGUI, string _text)
         {
-            textMeshProUGUI.text = text;
-            textMeshProUGUI.transform.DOPunchScale(Vector3.one * 0.3f, 0.3f);
+            _textMeshProUGUI.text = _text;
+            _textMeshProUGUI.transform.DOPunchScale(Vector3.one * 0.3f, 0.3f);
+        }
+        public static void OnHover(this RectTransform _rectTransform)
+        {
+            _rectTransform.DOLocalRotate(Vector3.forward * 5f, 0.2f, RotateMode.Fast);
+        }
+        public static void OnUnHover(this RectTransform _rectTransform)
+        {
+            _rectTransform.DOLocalRotate(Vector3.zero, 0.2f, RotateMode.Fast);
         }
     }
 }

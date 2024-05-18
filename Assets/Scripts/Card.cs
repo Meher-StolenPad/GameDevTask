@@ -11,7 +11,7 @@ namespace Davanci
         public bool m_IsCollected;
         #endregion
 
-        #region Serialzed Variable Region
+        #region Serialize Variables Region
         [SerializeField] private CanvasGroup CanvasGroup;
         [SerializeField] private RectTransform CardHolder;
         [SerializeField] private Image BackCardImage;
@@ -44,12 +44,12 @@ namespace Davanci
         public void OnHover()
         {
             if (CardState) return;
-            CardHolder.DOLocalRotate(Vector3.forward * 5f, 0.2f, RotateMode.Fast);
+            CardHolder.OnHover();
         }
         public void OnUnHover()
         {
             if (CardState) return;
-            CardHolder.DOLocalRotate(Vector3.zero, 0.2f, RotateMode.Fast);
+            CardHolder.OnUnHover();
         }
         #endregion
 

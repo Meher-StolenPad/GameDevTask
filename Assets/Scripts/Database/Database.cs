@@ -5,6 +5,8 @@ namespace Davanci
     public static class Database
     {
         private static Sprite[] NewSprites;
+        public static int LevelsMenuSceneIndex = 0;
+        public static int GameSceneIndex = 1;
 
         public static Sprite[] GetSprites(int cellsize)
         {
@@ -22,7 +24,11 @@ namespace Davanci
                 NewSprites[i] = Data.m_Instance.Sprites[i];
             }
             return NewSprites;
-        }   
+        }
+        public static Vector2Int[] GetLevels()
+        {
+            return Levels.m_Instance.LevelsDimension;
+        }
     }
 
 }

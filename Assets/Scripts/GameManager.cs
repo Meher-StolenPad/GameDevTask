@@ -1,5 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace Davanci
@@ -11,7 +10,7 @@ namespace Davanci
         #region Callback Region
         internal static Action<Card> OnCardFlippedCallback;
         internal static Action<int> OnTick;
-        internal static Action<int, bool> OnMoveCallback;   
+        internal static Action<int, bool> OnMoveCallback;
         internal static Action<int> OnCardMatchedCallback;
 
         #endregion
@@ -20,7 +19,7 @@ namespace Davanci
         private float timeSinceLastTick = 0f;
         private int TimeSinceStarted;
 
-        private int MatchCount; 
+        private int MatchCount;
         private int MovesCount;
         #endregion
 

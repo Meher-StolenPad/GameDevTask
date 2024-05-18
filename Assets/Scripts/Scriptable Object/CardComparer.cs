@@ -1,6 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
-using UnityEngine;
 
 namespace Davanci
 {
@@ -9,7 +7,7 @@ namespace Davanci
         public static Action<bool, Card, Card> m_OnCardsCompared;
 
         private static Card PreviousCard;
-            
+
         internal static void OnCardFlipped(Card newCard)
         {
             if (PreviousCard != null)
