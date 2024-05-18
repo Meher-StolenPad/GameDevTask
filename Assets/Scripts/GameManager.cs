@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace Davanci
@@ -7,7 +8,9 @@ namespace Davanci
     {
         public string Grade;
         public int MovesCount;
-        public int Time;    
+        public int Time;
+        public int ComboCount;
+        public int MaxComboCount;
     }
     public class GameManager : SingletonMB<GameManager>
     {
@@ -19,6 +22,8 @@ namespace Davanci
         internal static Action<int> OnTickCallback;
         internal static Action<int, bool> OnMoveCallback;
         internal static Action<int> OnCardMatchedCallback;
+        internal static Action<int, int> OnComboCallback;
+
         internal static Action<LevelCompletedData> OnLevelCompletedCallback;
 
         #endregion
@@ -32,6 +37,12 @@ namespace Davanci
 
         private int MatchCount;
         private int MovesCount;
+
+        private int ComboCount;
+        private int CurrentComboCount = 1;
+        private int MaxComboCount;
+        private bool IsCombo;
+        private int ComboBonus;
 
         private Vector2Int LevelDimension;
         private int MatchCountNeeded;
@@ -61,7 +72,7 @@ namespace Davanci
                 MatchCountNeeded = (LevelDimension.x * LevelDimension.y) / 2;
             }
         }
-
+            
         private void OnCardFlipped(Card newCard)
         {
             CardComparer.OnCardFlipped(newCard);
@@ -83,21 +94,37 @@ namespace Davanci
             {
                 _card1.HideCard();
                 _card2.HideCard();
+                CurrentComboCount = 1;
+                IsCombo = false;
             }
             OnMoveCallback?.Invoke(MovesCount, _isMatch);
+
+            if (IsCombo)
+            {
+                ComboCount++;
+                CurrentComboCount *= 2;
+                ComboBonus += CurrentComboCount;
+
+                MaxComboCount = MaxComboCount < CurrentComboCount ? CurrentComboCount : MaxComboCount;
+
+                OnComboCallback?.Invoke(ComboCount, CurrentComboCount);
+            }
+
+            IsCombo = _isMatch;
 
             CheckLevelCompleted();
         }
         public string CalculateScore()
         {
             int baseScore = 80;
+            int comboCountBonus = ComboCount * 5;
             int movePenalty = (MovesCount - MatchCount) * 5;
 
             int timeNeeded = LevelDimension.x * LevelDimension.y * 2;
 
             int timePenalty = TimeSinceStarted > timeNeeded ? Mathf.FloorToInt((TimeSinceStarted - timeNeeded) / 10f) * 3 : -20;
 
-            int totalScore = baseScore + -movePenalty - timePenalty;
+            int totalScore = baseScore + comboCountBonus + ComboBonus + -movePenalty - timePenalty;
 
             return Database.CalculateGrade(totalScore);
         }
@@ -108,7 +135,8 @@ namespace Davanci
                 LevelCompletedData.MovesCount = MovesCount;
                 LevelCompletedData.Time = TimeSinceStarted;
                 LevelCompletedData.Grade = CalculateScore();
-
+                LevelCompletedData.ComboCount = ComboCount;
+                LevelCompletedData.MaxComboCount = MaxComboCount;
                 OnLevelCompletedCallback?.Invoke(LevelCompletedData);
                 IsGameStarted = false;
                 OnGameStopped();
@@ -119,6 +147,8 @@ namespace Davanci
             TimeSinceStarted = 0;
             MatchCount = 0;
             MovesCount = 0;
+            ComboCount = 0;
+            MaxComboCount = 1;
         }
         private void OnGameStarted()
         {

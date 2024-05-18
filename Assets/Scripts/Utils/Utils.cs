@@ -82,11 +82,11 @@ namespace Davanci
 
             yield return sequence.WaitForCompletion();
         }
-        public static IEnumerator SetAnimatedIntText(this TextMeshProUGUI textMeshProUGUI, int endValue, float duration)
+        public static IEnumerator SetAnimatedIntText(this TextMeshProUGUI _textMeshProUGUI, int endValue, float duration)
         {
-            yield return textMeshProUGUI.FadeIn(0.3f);
+            yield return _textMeshProUGUI.FadeIn(0.3f);
 
-            textMeshProUGUI.text = "0";
+            _textMeshProUGUI.text = "0";
 
             int startValue = 0;
 
@@ -95,26 +95,60 @@ namespace Davanci
             sequence.Append(DOTween.To(() => 0, x =>
             {
                 startValue = x;
-                textMeshProUGUI.text = startValue.ToString();
+                _textMeshProUGUI.text = startValue.ToString();
             }, endValue, duration).SetEase(Ease.Linear));
 
             yield return sequence.WaitForCompletion();
         }
-        public static IEnumerator BounceAsync(this TextMeshProUGUI textMeshProUGUI, float duration, bool fadeOut)
+        public static IEnumerator BounceAsync(this TextMeshProUGUI _textMeshProUGUI, float duration, bool fadeOut)
         {
-            textMeshProUGUI.DOFade(1f, duration);
+            _textMeshProUGUI.DOFade(1f, duration);
 
-            yield return textMeshProUGUI.transform.DOScale(1.5f, duration).OnComplete(() =>
+            yield return _textMeshProUGUI.transform.DOScale(1.5f, duration).OnComplete(() =>
             {
-                textMeshProUGUI.transform.DOScale(1f, duration).OnComplete(() =>
+                _textMeshProUGUI.transform.DOScale(1f, duration).OnComplete(() =>
                 {
                     if (fadeOut)
                     {
-                        textMeshProUGUI.DOFade(0f, duration);
-                        textMeshProUGUI.transform.DOScale(0f, duration);
+                        _textMeshProUGUI.DOFade(0f, duration);
+                        _textMeshProUGUI.transform.DOScale(0f, duration);
                     }
                 });
             }).WaitForCompletion();
+        }
+        public static void Bounce(this TextMeshProUGUI _textMeshProUGUI, float duration, bool fadeOut)
+        {
+            _textMeshProUGUI.DOFade(1f, duration);
+
+            _textMeshProUGUI.transform.DOScale(1.5f, duration).OnComplete(() =>
+            {
+                _textMeshProUGUI.transform.DOScale(1f, duration).OnComplete(() =>
+                {
+                    if (fadeOut)
+                    {
+                        _textMeshProUGUI.DOFade(0f, duration);
+                        _textMeshProUGUI.transform.DOScale(0f, duration);
+                    }
+                });
+            });
+        }
+        public static IEnumerator SetAnimatedRishText(this TextMeshProUGUI _textMeshProUGUI, string stringToAttach, int endValue, float duration)
+        {
+            yield return _textMeshProUGUI.FadeIn(0.3f);
+
+            _textMeshProUGUI.text = stringToAttach + "1";
+
+            int startValue = 0;
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Append(DOTween.To(() => 0, x =>
+            {
+                startValue = x;
+                _textMeshProUGUI.text = stringToAttach + startValue.ToString();
+            }, endValue, duration).SetEase(Ease.Linear));
+
+            yield return sequence.WaitForCompletion();
         }
     }
 }

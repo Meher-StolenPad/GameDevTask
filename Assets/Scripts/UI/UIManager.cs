@@ -10,7 +10,8 @@ namespace Davanci
         [SerializeField] private TextMeshProUGUI TimeText;
         [SerializeField] private TextMeshProUGUI MovesCountText;
         [SerializeField] private TextMeshProUGUI MatchCountText;
-
+        [SerializeField] private TextMeshProUGUI ComboText;
+        [SerializeField] private TextMeshProUGUI ComboTextAnimation;
         [Header("Start Panel")]
         [SerializeField] private CanvasGroup TapToStartPanel;
 
@@ -18,6 +19,8 @@ namespace Davanci
         [SerializeField] private CanvasGroup LevelCompletedCanvasGroup;
         [SerializeField] private TextMeshProUGUI TotalMovesCountText;
         [SerializeField] private TextMeshProUGUI TotalTimeText;
+        [SerializeField] private TextMeshProUGUI ComboBonus;
+        [SerializeField] private TextMeshProUGUI MaxComboText;
         [SerializeField] private TextMeshProUGUI GradeText;
 
         private void Start()
@@ -26,6 +29,7 @@ namespace Davanci
             GameManager.OnCardMatchedCallback += OnCardMatched;
             GameManager.OnMoveCallback += OnCardMoved;
             GameManager.OnLevelCompletedCallback += OnLevelCompleted;
+            GameManager.OnComboCallback += OnCombo;
         }
         public void OnTapToStartClicked()
         {
@@ -41,7 +45,14 @@ namespace Davanci
         {
             MatchCountText.SetTextAnimated(count.ToString());
         }
+        private void OnCombo(int count, int currentComboCount)
+        {
+            ComboText.SetTextAnimated(count.ToString());
 
+            ComboTextAnimation.text = "X" + currentComboCount.ToString();
+
+            ComboTextAnimation.Bounce(0.3f, true);
+        }
         private void OnTick(int time)
         {
             SetTime(time);
@@ -64,6 +75,10 @@ namespace Davanci
             yield return TotalTimeText.SetAnimatedTimeText(levelCompletedData.Time, 0.5f);
 
             yield return TotalMovesCountText.SetAnimatedIntText(levelCompletedData.MovesCount, 0.5f);
+
+            yield return ComboBonus.SetAnimatedRishText("X", levelCompletedData.ComboCount, 0.5f);
+
+            yield return MaxComboText.SetAnimatedRishText("X", levelCompletedData.MaxComboCount, 0.5f);
 
             GradeText.text = levelCompletedData.Grade;
 
