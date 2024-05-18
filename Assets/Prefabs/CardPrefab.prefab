@@ -62,8 +62,9 @@ GameObject:
   - component: {fileID: 54351074642200061}
   - component: {fileID: 2928394774377604148}
   - component: {fileID: 4065100284021261238}
+  - component: {fileID: 7597594567751896074}
   m_Layer: 5
-  m_Name: Front
+  m_Name: Back Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,6 +128,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7597594567751896074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769954171113416446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2235518464134784496}
+          m_TargetAssemblyTypeName: Davanci.Card, Assembly-CSharp
+          m_MethodName: OnCardClicked
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2788363944846206483
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,8 +217,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanvasGroup: {fileID: 787198712540210526}
-  BackCard: {fileID: 7876975363488389854}
-  FaceCard: {fileID: 4065100284021261238}
+  CardHolder: {fileID: 3058921621571527283}
+  BackCardImage: {fileID: 4065100284021261238}
+  FaceCardImage: {fileID: 7876975363488389854}
 --- !u!1 &4722901012708730163
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,8 +231,9 @@ GameObject:
   - component: {fileID: 3586459652866266865}
   - component: {fileID: 8296956822902405807}
   - component: {fileID: 7876975363488389854}
+  - component: {fileID: 7098587021190454745}
   m_Layer: 5
-  m_Name: 'Back '
+  m_Name: Face Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,3 +297,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7098587021190454745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722901012708730163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
