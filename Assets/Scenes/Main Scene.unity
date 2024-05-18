@@ -718,10 +718,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddaeb2a14870f04fabaa7e4e3ad4cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 2788363944846206483, guid: f74581b255f864a42ac8532f45a0b511,
+  cardPrefab: {fileID: 2235518464134784496, guid: f74581b255f864a42ac8532f45a0b511,
     type: 3}
   rows: 2
-  columns: 3
+  columns: 2
   cards: []
   gridLayout: {fileID: 2007026791}
 --- !u!4 &1886737082

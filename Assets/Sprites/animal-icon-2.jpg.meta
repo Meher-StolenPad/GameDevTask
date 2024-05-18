@@ -1,0 +1,673 @@
+fileFormatVersion: 2
+guid: 7f373c34296e70d49a6ed9a93cb7783e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: animal-icon-2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1638.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c85bfe56a8fc28845b17d52a773bfd3e
+      internalID: -258455080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_1
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 1638.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c241156d2e0c7d499e35875a4de8e4d
+      internalID: -598892953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_2
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 1638.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8f84e9015101754c8d786d608e0676a
+      internalID: -1223527804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_3
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 1638.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8764d52f7adb003468b0b0651de41e46
+      internalID: -593736608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_4
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 1638.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83f8e5ca53292a74c9bc636819aa46b7
+      internalID: -985203968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1229.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3824e58dcf7b4e42ac634564fe99145
+      internalID: 11945472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_6
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 1229.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca2c8d91569efb349bee4d86651d509c
+      internalID: -318482086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_7
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 1229.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 532c6b36aeb1a1b42b7928a0de91ecbf
+      internalID: 732242724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_8
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 1229.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7849699832114e246bb1103abb73cd2d
+      internalID: 2088634733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_9
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 1229.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a278625145aacb41ba36fe1ead84bc2
+      internalID: 1419754847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 820.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f93f7867327e9948a080a7c61cb006f
+      internalID: 140305963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_11
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 820.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6622fca7fa169c841b8a0b2dd74def81
+      internalID: 1707323633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_12
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 820.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d639683f710de8145a8dd8835bb2b9ab
+      internalID: -583618574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_13
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 820.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e14fa19d46df1142bafb478cb8d952b
+      internalID: -830871561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_14
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 820.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1f4a0a08bf4afc4d846e4ae60ccecfa
+      internalID: -1340362203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 411.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e533da4d03c2a8247b67e98a53a8933e
+      internalID: 1919211648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_16
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 411.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cbababeba9220a43b4c55f493b572be
+      internalID: 1122086415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_17
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 411.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d67d92fdccdbee4a9786a1e25aa2e33
+      internalID: -1158301488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_18
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 411.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea357bf8287fb44468228b68468cb640
+      internalID: -605625410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_19
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 411.4
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec96eaedff429e040a26fc415d4c9c3a
+      internalID: 86834308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2.399994
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ce69c54f4fde2a46a820c7c6e20435f
+      internalID: -116768467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_21
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 2.399994
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4f271de2a55e9f4f97331fd6869a66a
+      internalID: 745340953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_22
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 2.399994
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0972ad05024bee468a21dc6d8731823
+      internalID: 545657829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_23
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 2.399994
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2942f91980d5624fa251f81a2549cde
+      internalID: 368877158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animal-icon-2_24
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 2.399994
+        width: 409.6
+        height: 409.6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcd199a62e04a2b44bd20da12576a612
+      internalID: -710649461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      animal-icon-2_0: -258455080
+      animal-icon-2_1: -598892953
+      animal-icon-2_10: 140305963
+      animal-icon-2_11: 1707323633
+      animal-icon-2_12: -583618574
+      animal-icon-2_13: -830871561
+      animal-icon-2_14: -1340362203
+      animal-icon-2_15: 1919211648
+      animal-icon-2_16: 1122086415
+      animal-icon-2_17: -1158301488
+      animal-icon-2_18: -605625410
+      animal-icon-2_19: 86834308
+      animal-icon-2_2: -1223527804
+      animal-icon-2_20: -116768467
+      animal-icon-2_21: 745340953
+      animal-icon-2_22: 545657829
+      animal-icon-2_23: 368877158
+      animal-icon-2_24: -710649461
+      animal-icon-2_3: -593736608
+      animal-icon-2_4: -985203968
+      animal-icon-2_5: 11945472
+      animal-icon-2_6: -318482086
+      animal-icon-2_7: 732242724
+      animal-icon-2_8: 2088634733
+      animal-icon-2_9: 1419754847
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
