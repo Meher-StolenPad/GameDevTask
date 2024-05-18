@@ -38,3 +38,7 @@ MonoBehaviour:
   - {fileID: 545657829, guid: 7f373c34296e70d49a6ed9a93cb7783e, type: 3}
   - {fileID: 368877158, guid: 7f373c34296e70d49a6ed9a93cb7783e, type: 3}
   - {fileID: -710649461, guid: 7f373c34296e70d49a6ed9a93cb7783e, type: 3}
+  CardFlipClip: {fileID: 8300000, guid: 865c2a40ef120f64b9bfe4a0825575d5, type: 3}
+  UnmatchClip: {fileID: 8300000, guid: f71d74a5b6a7c85429bed51eb335247b, type: 3}
+  MatchClip: {fileID: 8300000, guid: 8808ba00a0b3b704abd0c88cb927aa67, type: 3}
+  LevelCompletedClip: {fileID: 8300000, guid: 22dd40203c73f544881af47519542cce, type: 3}

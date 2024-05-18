@@ -21,6 +21,10 @@ namespace Davanci
             }
         }
         public Sprite[] Sprites;
+        public AudioClip CardFlipClip;
+        public AudioClip UnmatchClip;
+        public AudioClip MatchClip;
+        public AudioClip LevelCompletedClip;
     }
 }
 

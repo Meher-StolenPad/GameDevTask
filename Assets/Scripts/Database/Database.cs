@@ -60,6 +60,26 @@ namespace Davanci
             }
             return "F";
         }
+        internal static AudioClip GetAudioClip(ClipFx clipType)
+        {
+            AudioClip audioClip = null;
+            switch (clipType)
+            {
+                case ClipFx.CardFlipped:
+                    audioClip = Data.m_Instance.CardFlipClip;
+                    break;
+                case ClipFx.CardMatch:
+                    audioClip = Data.m_Instance.MatchClip;
+                    break;
+                case ClipFx.CardUnMatch:
+                    audioClip = Data.m_Instance.UnmatchClip;
+                    break;
+                case ClipFx.LevelCompleted:
+                    audioClip = Data.m_Instance.LevelCompletedClip;
+                    break;
+            }
+            return audioClip;
+        }
     }
 
 }
