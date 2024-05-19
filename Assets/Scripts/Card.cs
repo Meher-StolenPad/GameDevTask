@@ -134,6 +134,7 @@ namespace Davanci
         }
         internal void Hint()
         {
+            if (CardState) return;
             CardHolder.Vibrate(1f);
         }
         public CardSave CreateCardSave()

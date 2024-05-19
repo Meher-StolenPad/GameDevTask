@@ -60,11 +60,15 @@ namespace Davanci
             Sequence sequence = DOTween.Sequence();
 
             // Add the vibration tweens to the sequence
-            sequence.Append(_transform.DOLocalRotate(Vector3.forward * strength, 0.1f, RotateMode.Fast).SetEase(Ease.InOutSine));
-            sequence.Append(_transform.DOLocalRotate(Vector3.forward * -strength, 0.1f, RotateMode.Fast).SetEase(Ease.InOutSine));
+            sequence.Append(_transform.DOLocalRotate(Vector3.forward * strength, 0.1f, RotateMode.Fast).SetEase(Ease.InBack));
+            sequence.Append(_transform.DOLocalRotate(Vector3.forward * -strength, 0.1f, RotateMode.Fast).SetEase(Ease.InBack));
+
+            // Calculate the total loops based on the duration and the time for each pair of tweens
+            int totalLoops = Mathf.FloorToInt(duration / 0.2f);
 
             // Set the sequence to loop for the specified duration
-            sequence.SetLoops((int)(duration / 0.2f), LoopType.Yoyo);
+            sequence.SetLoops(totalLoops, LoopType.Yoyo)
+                    .Append(_transform.DOLocalRotate(Vector3.zero, 0.1f)); // Ensure it finishes at rotation 0
         }
         public static IEnumerator FadeIn(this TextMeshProUGUI _textMeshProUGUI, float duration)
         {
