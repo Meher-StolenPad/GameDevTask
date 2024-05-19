@@ -89,6 +89,7 @@ namespace Davanci
         internal void ShowCard()
         {
             CardState = true;
+            GameManager.OnCardStartFlippingCallback?.Invoke();
             CardHolder.DOLocalRotate(Vector3.up * 90f, 0.3f, RotateMode.Fast).OnComplete(() =>
             {
                 BackCardImage.gameObject.SetActive(false);

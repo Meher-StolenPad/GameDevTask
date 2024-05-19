@@ -18,8 +18,9 @@ namespace Davanci
 
         #region Callback Region
         internal static Action OnGameStartedCallback;
+        internal static Action OnCardStartFlippingCallback;
         internal static Action<Card> OnCardFlippedCallback;
-        internal static Action<int> OnTickCallback;
+        internal static Action<int> OnTickCallback; 
         internal static Action<int, bool> OnMoveCallback;
         internal static Action<int> OnCardMatchedCallback;
         internal static Action<int, int> OnComboCallback;
