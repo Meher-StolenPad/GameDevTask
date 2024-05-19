@@ -35,6 +35,10 @@ namespace Davanci
             }
             return NewSprites;
         }
+        internal static Sprite GetSprite(int id)
+        {
+            return Data.m_Instance.Sprites[id];
+        }
         public static Vector2Int[] GetLevels()
         {
             return Levels.m_Instance.LevelsDimension;

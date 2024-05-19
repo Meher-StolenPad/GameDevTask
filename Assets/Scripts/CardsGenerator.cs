@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 namespace Davanci
 {
@@ -42,14 +41,6 @@ namespace Davanci
         private void CreateCards(int rows, int columns)
         {
             CalculateLayout();
-
-            if (Cards != null)
-            {
-                foreach (Card card in Cards)
-                {
-                    Destroy(card.gameObject);
-                }
-            }
             int cellCount = rows * columns;
 
 
@@ -72,12 +63,48 @@ namespace Davanci
 
                 if (!CheckMiddleCell(middleCell, i))
                 {
-                    newCard.Init(iconIndex, SpritesToUse[iconIndex], DiscardPile);
+                    newCard.Init(iconIndex, SpritesToUse[iconIndex], DiscardPile, i);
                     indexInArray++;
                 }
                 else
                 {
-                    newCard.DisableCard();
+                    newCard.DisableCard(indexInArray);
+                }
+
+            }
+            GameSave.OnCardsCreated(Cards, LevelsManager.Instance.m_CurrentLevel);
+        }
+        private void CreateCards(List<CardSave> cardsSave)
+        {
+            int cellCount = Rows * Columns;
+
+            Cards = new List<Card>();
+
+            int indexInArray = 0;
+
+            int? middleCell = cellCount % 2 == 0 ? null : (cellCount / 2);
+
+            for (int i = 0; i < cellCount; i++)
+            {
+                // Instantiate a new card
+                Card newCard = Instantiate(CardPrefab, GridLayout.transform);
+                Cards.Add(newCard);
+
+                CardSave save = cardsSave[i];
+
+                if (!CheckMiddleCell(middleCell, i))
+                {
+                    Sprite sprite = Database.GetSprite(save.Id);
+
+                    newCard.Reload(save.Id,
+                        sprite,
+                        DiscardPile,
+                        i,
+                        save.Collected);
+                }
+                else
+                {
+                    newCard.DisableCard(indexInArray);
                 }
 
             }
@@ -108,6 +135,14 @@ namespace Davanci
             Rows = dimension.x;
             Columns = dimension.y;
             CreateCards(Rows, Columns);
+        }
+        public void ReloadLevel(GameSaveHolder gameSaveHolder, Vector2Int dimension)
+        {
+            Rows = dimension.x;
+            Columns = dimension.y;
+
+            CalculateLayout();
+            CreateCards(gameSaveHolder.cardSaves);
         }
         private void Update()
         {

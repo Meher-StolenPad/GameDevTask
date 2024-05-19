@@ -23,6 +23,8 @@ namespace Davanci
         internal static Action<int, bool> OnMoveCallback;
         internal static Action<int> OnCardMatchedCallback;
         internal static Action<int, int> OnComboCallback;
+        internal static Action<GameSaveHolder> OnLevelLoadedCallback;
+
 
         internal static Action<LevelCompletedData> OnLevelCompletedCallback;
 
@@ -62,7 +64,36 @@ namespace Davanci
         private void Start()
         {
             CalculateMatchNeeded();
-            CardsGenerator.Instance.InitCardsGenerator(LevelDimension);
+
+            //check if there's a save 
+            if (GameSave.HasSave(out GameSaveHolder gameSaveHolder))
+            {
+                if (gameSaveHolder.cardSaves.Count > 0)
+                {
+                    ReloadDataFromSave(gameSaveHolder);
+                    CardsGenerator.Instance.ReloadLevel(gameSaveHolder, LevelDimension);
+                }
+                else
+                {
+                    GameSave.DeleteSave();
+                    OnGameStopped();
+                    CardsGenerator.Instance.InitCardsGenerator(LevelDimension);
+                }
+            }
+            else
+            {
+                CardsGenerator.Instance.InitCardsGenerator(LevelDimension);
+            }
+        }
+        private void ReloadDataFromSave(GameSaveHolder gameSaveHolder)
+        {
+            TimeSinceStarted = gameSaveHolder.Time;
+            ComboCount = gameSaveHolder.ComboCount;
+            MatchCount = gameSaveHolder.MatchCount;
+            MovesCount = gameSaveHolder.MovesCount;
+            MaxComboCount = gameSaveHolder.MaxComboCount;
+
+            OnLevelLoadedCallback?.Invoke(gameSaveHolder);
         }
         private void CalculateMatchNeeded()
         {
@@ -89,6 +120,8 @@ namespace Davanci
 
                 _card1.CollectCard();
                 _card2.CollectCard(DelayBetweenCards);
+
+                GameSave.OnCardsUpdated(_card1.Index, _card2.Index);
             }
             else
             {
@@ -111,6 +144,8 @@ namespace Davanci
             }
 
             IsCombo = _isMatch;
+
+            GameSave.OnDataChanged(MatchCount, MovesCount, TimeSinceStarted, ComboCount, MaxComboCount);
 
             CheckLevelCompleted();
         }
@@ -149,6 +184,7 @@ namespace Davanci
             MovesCount = 0;
             ComboCount = 0;
             MaxComboCount = 1;
+            GameSave.DeleteSave();
         }
         private void OnGameStarted()
         {

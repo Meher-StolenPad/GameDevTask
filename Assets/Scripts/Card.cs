@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ namespace Davanci
 
         #region Private Variable Region
         private int Id;
+        public int Index;
         private bool CardState;
         private RectTransform DiscardPile;
         #endregion
@@ -53,15 +55,32 @@ namespace Davanci
         }
         #endregion
 
-        internal void Init(int _id, Sprite _face, RectTransform _discardPile)
+        internal void Init(int _id, Sprite _face, RectTransform _endpoint, int index)
         {
             Id = _id;
             FaceCardImage.sprite = _face;
-            DiscardPile = _discardPile;
+            DiscardPile = _endpoint;
+            Index = index;
         }
-        internal void DisableCard()
+        internal void Reload(int _id, Sprite _face, RectTransform _endpoint, int index, bool collected)
+        {
+            Id = _id;
+            FaceCardImage.sprite = _face;
+            DiscardPile = _endpoint;
+            Index = index;
+            m_IsCollected = collected;
+            if (m_IsCollected)
+            {
+                CardHolder.transform.SetParent(DiscardPile);
+                CardHolder.anchoredPosition = Vector2.zero;
+                CanvasGroup.interactable = false;
+                CanvasGroup.blocksRaycasts = false;
+            }
+        }
+        internal void DisableCard(int index)
         {
             Id = -1;
+            Index = index;
             CanvasGroup.alpha = 0;
             CanvasGroup.interactable = false;
             CanvasGroup.blocksRaycasts = false;
@@ -106,7 +125,10 @@ namespace Davanci
             });
             m_IsCollected = true;
         }
-
+        public CardSave CreateCardSave()
+        {
+            return new CardSave(Id, m_IsCollected);
+        }
     }
 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -30,7 +31,11 @@ namespace Davanci
             GameManager.OnMoveCallback += OnCardMoved;
             GameManager.OnLevelCompletedCallback += OnLevelCompleted;
             GameManager.OnComboCallback += OnCombo;
+            GameManager.OnLevelLoadedCallback += OnLevelLoaded;
         }
+
+
+
         public void OnTapToStartClicked()
         {
             StartCoroutine(TapToStartPanel.FadeOut(0.3f));
@@ -84,12 +89,20 @@ namespace Davanci
 
             yield return GradeText.BounceAsync(0.3f, false);
         }
+        private void OnLevelLoaded(GameSaveHolder gameSaveHolder)
+        {
+            MovesCountText.text = gameSaveHolder.MovesCount.ToString();
+            MatchCountText.text = gameSaveHolder.MatchCount.ToString();
+            ComboText.text = gameSaveHolder.ComboCount.ToString();
+            SetTime(gameSaveHolder.Time);
+        }
         private void OnDisable()
         {
             GameManager.OnTickCallback -= OnTick;
             GameManager.OnCardMatchedCallback -= OnCardMatched;
             GameManager.OnMoveCallback -= OnCardMoved;
             GameManager.OnLevelCompletedCallback -= OnLevelCompleted;
+            GameManager.OnLevelLoadedCallback -= OnLevelLoaded;
         }
     }
 

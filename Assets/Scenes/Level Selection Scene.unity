@@ -1092,7 +1092,7 @@ GameObject:
   - component: {fileID: 1886737082}
   - component: {fileID: 1886737083}
   m_Layer: 0
-  m_Name: '                                 ------- Cards Generator -------'
+  m_Name: '                                 ------- Levels Manager  -------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

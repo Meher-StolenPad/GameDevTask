@@ -10,9 +10,17 @@ namespace Davanci
         [SerializeField] private CanvasGroup CanvasGroup;
 
         private bool IsLoadingScene;
+        private int CurrentLevel;
 
         void Start()
         {
+            if (GameSave.HasSave(out GameSaveHolder gameSaveHolder))
+            {
+                CurrentLevel = gameSaveHolder.Level;
+                LoadGameScene();
+                LevelsManager.m_OnSceneLoadedCallback?.Invoke(CurrentLevel);
+                return;
+            }
             FadeOut(0.5f);
         }
         internal void LoadGameScene()
@@ -38,7 +46,7 @@ namespace Davanci
             StartCoroutine(LoadLevelSelectionSceneCoroutine());
         }
         internal IEnumerator LoadLevelSelectionSceneCoroutine()
-        {   
+        {
             IsLoadingScene = true;
 
             yield return CanvasGroup.DOFade(1f, 0.5f).WaitForCompletion();
@@ -49,7 +57,7 @@ namespace Davanci
         }
         private void OnGameSceneLoaded(AsyncOperation operation)
         {
-            if(operation.isDone)
+            if (operation.isDone)
             {
                 FadeOut();
                 IsLoadingScene = false;

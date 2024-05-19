@@ -6,8 +6,7 @@ namespace Davanci
     {
         public static Action<int> m_OnSceneLoadedCallback;
         public int m_CurrentLevel;
-
-        private void Start()
+        private void OnEnable()
         {
             m_OnSceneLoadedCallback += OnSceneLoaded;
         }
