@@ -16,6 +16,8 @@ namespace Davanci
     public class GameManager : SingletonMB<GameManager>
     {
         private const float DelayBetweenCards = 0.1f;
+        private const int TimeToCheckForHint = 10;
+        private const int TimeBetweenHints = 3;
 
         #region Callback Region
         internal static Action OnGameStartedCallback;
@@ -39,6 +41,9 @@ namespace Davanci
 
         private float timeSinceLastTick = 0f;
         private int TimeSinceStarted;
+        private int TimeSinceLastMatch;
+
+        private float timeSinceLastHint;
 
         private int MatchCount;
         private int MovesCount;
@@ -130,7 +135,8 @@ namespace Davanci
                 _card1.CollectCard();
                 _card2.CollectCard(DelayBetweenCards);
 
-                GameSave.OnCardsUpdated(_card1.Index, _card2.Index);
+                GameSave.OnCardsUpdated(_card1.m_Index, _card2.m_Index);
+                TimeSinceLastMatch = 0;
             }
             else
             {
@@ -233,7 +239,22 @@ namespace Davanci
                 timeSinceLastTick -= 1f;
                 TimeSinceStarted++;
                 OnTickCallback?.Invoke(TimeSinceStarted);
+
+                // Increment the time since the last match and hint
+                TimeSinceLastMatch++;
+                timeSinceLastHint++;
+
+                // Check if it's time to activate a hint
+                if (TimeSinceLastMatch >= TimeToCheckForHint && timeSinceLastHint >= TimeBetweenHints)
+                {
+                    ActivateHint();
+                    timeSinceLastHint = 0; // Reset the time since the last hint
+                }
             }
+        }
+        private void ActivateHint()
+        {
+            CardsGenerator.Instance.Hint();
         }
         private void OnDisable()
         {

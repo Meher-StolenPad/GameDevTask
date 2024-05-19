@@ -10,6 +10,8 @@ namespace Davanci
     {
         #region Public variables Region
         public bool m_IsCollected;
+        public int m_Id;
+        public int m_Index;
         #endregion
 
         #region Serialize Variables Region
@@ -21,8 +23,7 @@ namespace Davanci
         #endregion
 
         #region Private Variable Region
-        private int Id;
-        public int Index;
+
         private bool CardState;
         private RectTransform DiscardPile;
         #endregion
@@ -32,7 +33,7 @@ namespace Davanci
         {
             if (other == null)
                 return 1;
-            return Id.CompareTo(other.Id);
+            return m_Id.CompareTo(other.m_Id);
         }
         #endregion
 
@@ -57,17 +58,17 @@ namespace Davanci
 
         internal void Init(int _id, Sprite _face, RectTransform _endpoint, int index)
         {
-            Id = _id;
+            m_Id = _id;
             FaceCardImage.sprite = _face;
             DiscardPile = _endpoint;
-            Index = index;
+            m_Index = index;
         }
         internal void Reload(int _id, Sprite _face, RectTransform _endpoint, int index, bool collected)
         {
-            Id = _id;
+            m_Id = _id;
             FaceCardImage.sprite = _face;
             DiscardPile = _endpoint;
-            Index = index;
+            m_Index = index;
             m_IsCollected = collected;
             if (m_IsCollected)
             {
@@ -79,8 +80,8 @@ namespace Davanci
         }
         internal void DisableCard(int index)
         {
-            Id = -1;
-            Index = index;
+            m_Id = -1;
+            m_Index = index;
             CanvasGroup.alpha = 0;
             CanvasGroup.interactable = false;
             CanvasGroup.blocksRaycasts = false;
@@ -131,9 +132,13 @@ namespace Davanci
             });
             m_IsCollected = true;
         }
+        internal void Hint()
+        {
+            CardHolder.Vibrate(1f);
+        }
         public CardSave CreateCardSave()
         {
-            return new CardSave(Id, m_IsCollected);
+            return new CardSave(m_Id, m_IsCollected);
         }
     }
 

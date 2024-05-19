@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -155,6 +156,25 @@ namespace Davanci
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 CreateCards(Rows, Columns);
+            }
+        }
+
+        internal void Hint()
+        {
+            var matchingGroup = Cards
+         .Where(card => !card.m_IsCollected) // Filter non-collected cards
+         .GroupBy(card => card.m_Id) // Group by Id
+         .FirstOrDefault(group => group.Count() >= 2); // Find the first group with at least 2 cards
+
+            if (matchingGroup != null)
+            {
+                var cardList = matchingGroup.ToList();
+                cardList[0].Hint();
+                cardList[1].Hint();
+            }
+            else
+            {
+                Debug.Log("No matching cards found.");
             }
         }
     }

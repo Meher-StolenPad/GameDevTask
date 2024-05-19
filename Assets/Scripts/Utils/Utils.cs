@@ -54,6 +54,18 @@ namespace Davanci
         {
             _rectTransform.DOLocalRotate(Vector3.zero, 0.2f, RotateMode.Fast);
         }
+        public static void Vibrate(this Transform _transform, float duration,float strength = 5f)
+        {
+            // Create a sequence
+            Sequence sequence = DOTween.Sequence();
+
+            // Add the vibration tweens to the sequence
+            sequence.Append(_transform.DOLocalRotate(Vector3.forward * strength, 0.1f, RotateMode.Fast).SetEase(Ease.InOutSine));
+            sequence.Append(_transform.DOLocalRotate(Vector3.forward * -strength, 0.1f, RotateMode.Fast).SetEase(Ease.InOutSine));
+
+            // Set the sequence to loop for the specified duration
+            sequence.SetLoops((int)(duration / 0.2f), LoopType.Yoyo);
+        }
         public static IEnumerator FadeIn(this TextMeshProUGUI _textMeshProUGUI, float duration)
         {
             yield return _textMeshProUGUI.DOFade(1f, duration).WaitForCompletion();
