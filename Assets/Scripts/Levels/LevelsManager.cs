@@ -25,6 +25,22 @@ namespace Davanci
             m_CurrentLevel = level;
             SceneLoader.Instance.LoadGameScene();
         }
+        public void OnRestartButtonClicked()
+        {
+            SceneLoader.Instance.LoadGameScene();
+        }
+        public void OnNextLevelButtonClicked()
+        {
+            if (Database.HasLevel(m_CurrentLevel + 1))
+            {
+                m_CurrentLevel++;
+                SceneLoader.Instance.LoadGameScene();
+            }
+        }
+        public void OnBackToLevelMenuClicked()
+        {
+            SceneLoader.Instance.LoadLevelsMenuScene();
+        }
 
     }
 

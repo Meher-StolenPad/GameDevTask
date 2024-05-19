@@ -21,7 +21,8 @@ namespace Davanci
                 LevelsManager.m_OnSceneLoadedCallback?.Invoke(CurrentLevel);
                 return;
             }
-            FadeOut(0.5f);
+            StartCoroutine(FadeOut(0.5f));
+
         }
         internal void LoadGameScene()
         {
@@ -33,7 +34,7 @@ namespace Davanci
         {
             IsLoadingScene = true;
 
-            yield return CanvasGroup.DOFade(1f, 0.5f).WaitForCompletion();
+            yield return StartCoroutine(FadeIn(0.5f));
 
             DOTween.KillAll();
 
@@ -49,7 +50,7 @@ namespace Davanci
         {
             IsLoadingScene = true;
 
-            yield return CanvasGroup.DOFade(1f, 0.5f).WaitForCompletion();
+            yield return StartCoroutine(FadeIn(0.5f));
 
             DOTween.KillAll();
 
@@ -59,7 +60,7 @@ namespace Davanci
         {
             if (operation.isDone)
             {
-                FadeOut();
+                StartCoroutine(FadeOut(0.5f));
                 IsLoadingScene = false;
             }
         }
@@ -67,13 +68,42 @@ namespace Davanci
         {
             if (operation.isDone)
             {
-                FadeOut();
+                StartCoroutine(FadeOut(0.5f));
+                IsLoadingScene = false;
             }
         }
 
-        private void FadeOut(float duration = 1f)
+        private IEnumerator FadeOut(float duration)
         {
-            CanvasGroup.DOFade(0f, duration);
+            float elapsed = 0f;
+            float startAlpha = CanvasGroup.alpha;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                CanvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, elapsed / duration);
+                yield return null;
+            }
+
+            CanvasGroup.alpha = 0f;
+        }
+        private IEnumerator FadeIn(float duration)
+        {
+            if (CanvasGroup.alpha == 1f)
+            {
+                yield break; // Exit the coroutine if the alpha is already 1
+            }
+
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                CanvasGroup.alpha = Mathf.Lerp(0, 1f, elapsed / duration);
+                yield return null;
+            }
+
+            CanvasGroup.alpha = 1f;
         }
     }
 }

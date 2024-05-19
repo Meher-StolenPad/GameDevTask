@@ -27,7 +27,8 @@ namespace Davanci
         public static void SetTextAnimated(this TextMeshProUGUI _textMeshProUGUI, string _text)
         {
             _textMeshProUGUI.text = _text;
-            _textMeshProUGUI.rectTransform.DOPunchScale(Vector3.one * 0.3f, 0.3f);
+            if (_textMeshProUGUI != null)
+                _textMeshProUGUI.rectTransform.DOPunchScale(Vector3.one * 0.3f, 0.3f);
         }
         public static IEnumerator FadeIn(this CanvasGroup canvasGroup, float duration)
         {
@@ -116,18 +117,18 @@ namespace Davanci
                 });
             }).WaitForCompletion();
         }
-        public static void Bounce(this TextMeshProUGUI _textMeshProUGUI, float duration, bool fadeOut)
+        public static void Bounce(this TextMeshProUGUI textMeshProUGUI, float duration, bool fadeOut)
         {
-            _textMeshProUGUI.DOFade(1f, duration);
+            textMeshProUGUI.DOFade(1f, duration);
 
-            _textMeshProUGUI.transform.DOScale(1.5f, duration).OnComplete(() =>
+            textMeshProUGUI.transform.DOScale(1.5f, duration).OnComplete(() =>
             {
-                _textMeshProUGUI.transform.DOScale(1f, duration).OnComplete(() =>
+                textMeshProUGUI.transform.DOScale(1f, duration).OnComplete(() =>
                 {
                     if (fadeOut)
                     {
-                        _textMeshProUGUI.DOFade(0f, duration);
-                        _textMeshProUGUI.transform.DOScale(0f, duration);
+                        textMeshProUGUI.DOFade(0f, duration);
+                        textMeshProUGUI.transform.DOScale(0f, duration);
                     }
                 });
             });

@@ -1,7 +1,9 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Davanci
 {
@@ -13,8 +15,9 @@ namespace Davanci
         [SerializeField] private TextMeshProUGUI MatchCountText;
         [SerializeField] private TextMeshProUGUI ComboText;
         [SerializeField] private TextMeshProUGUI ComboTextAnimation;
+        [SerializeField] private Animator ComboTextAnimator;
         [Header("Start Panel")]
-        [SerializeField] private CanvasGroup TapToStartPanel;
+        [SerializeField] private CanvasGroup TapToStartPanel;   
 
         [Header("Level Completed Panel")]
         [SerializeField] private CanvasGroup LevelCompletedCanvasGroup;
@@ -23,6 +26,13 @@ namespace Davanci
         [SerializeField] private TextMeshProUGUI ComboBonus;
         [SerializeField] private TextMeshProUGUI MaxComboText;
         [SerializeField] private TextMeshProUGUI GradeText;
+        [SerializeField] private CanvasGroup LevelCompletedButtonsHolder;
+            
+        [Header("Pause Panel")]
+        [SerializeField] private CanvasGroup PausePanel;
+        [SerializeField] private Image EnabledSoundImage;
+        [SerializeField] private Image DisabledSoundImage;
+        private bool SoundState = true;
 
         private void Start()
         {
@@ -33,7 +43,19 @@ namespace Davanci
             GameManager.OnComboCallback += OnCombo;
             GameManager.OnLevelLoadedCallback += OnLevelLoaded;
         }
-
+        private void OnDestroy()
+        {
+            GameManager.OnTickCallback -= OnTick;
+            GameManager.OnCardMatchedCallback -= OnCardMatched;
+            GameManager.OnMoveCallback -= OnCardMoved;
+            GameManager.OnLevelCompletedCallback -= OnLevelCompleted;
+            GameManager.OnLevelLoadedCallback -= OnLevelLoaded;
+            GameManager.OnComboCallback -= OnCombo;
+        }
+        private void OnDisable()
+        {
+          
+        }
 
 
         public void OnTapToStartClicked()
@@ -55,8 +77,7 @@ namespace Davanci
             ComboText.SetTextAnimated(count.ToString());
 
             ComboTextAnimation.text = "X" + currentComboCount.ToString();
-
-            ComboTextAnimation.Bounce(0.3f, true);
+            ComboTextAnimator.SetTrigger("StartAnimation");
         }
         private void OnTick(int time)
         {
@@ -88,6 +109,8 @@ namespace Davanci
             GradeText.text = levelCompletedData.Grade;
 
             yield return GradeText.BounceAsync(0.3f, false);
+
+            yield return LevelCompletedButtonsHolder.FadeIn(.3f);
         }
         private void OnLevelLoaded(GameSaveHolder gameSaveHolder)
         {
@@ -96,14 +119,46 @@ namespace Davanci
             ComboText.text = gameSaveHolder.ComboCount.ToString();
             SetTime(gameSaveHolder.Time);
         }
-        private void OnDisable()
+        public void OnSoundButtonClicked(bool _state)
         {
-            GameManager.OnTickCallback -= OnTick;
-            GameManager.OnCardMatchedCallback -= OnCardMatched;
-            GameManager.OnMoveCallback -= OnCardMoved;
-            GameManager.OnLevelCompletedCallback -= OnLevelCompleted;
-            GameManager.OnLevelLoadedCallback -= OnLevelLoaded;
+            SoundState = _state;
+            if(SoundState)
+            {
+                EnabledSoundImage.gameObject.SetActive(true);
+                DisabledSoundImage.gameObject.SetActive(false);
+            }
+            else
+            {
+                EnabledSoundImage.gameObject.SetActive(false);
+                DisabledSoundImage.gameObject.SetActive(true);
+            }   
+            SoundManager.OnSoundSateChangedCallback?.Invoke(SoundState);
         }
+        public void OnPauseClicked()
+        {
+            GameManager.OnGamePausedCallback(true);
+            StartCoroutine(PausePanel.FadeIn(0.3f));
+        }
+        public void OnResumeClicked()
+        {
+            GameManager.OnGamePausedCallback(false);
+            StartCoroutine(PausePanel.FadeOut(0.3f));
+        }
+        public void OnRestartClicked()
+        {
+            LevelsManager.Instance.OnRestartButtonClicked();
+            GameManager.OnGameEndCallback?.Invoke();
+        }
+        public void OnNextLevelClicked()
+        {
+            LevelsManager.Instance.OnNextLevelButtonClicked();
+        }
+        public void OnBackToLevelMenuClicked()
+        {
+            LevelsManager.Instance.OnBackToLevelMenuClicked();
+            GameManager.OnGameEndCallback?.Invoke();
+        }
+
     }
 
 }

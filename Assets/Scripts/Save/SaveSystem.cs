@@ -47,8 +47,6 @@ namespace Davanci
 
                 // Write JSON string to file
                 File.WriteAllText(filePath, json);
-                Debug.Log(filePath);
-
             }
             catch (Exception e)
             {

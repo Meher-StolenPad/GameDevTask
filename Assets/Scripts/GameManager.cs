@@ -25,8 +25,9 @@ namespace Davanci
         internal static Action<int> OnCardMatchedCallback;
         internal static Action<int, int> OnComboCallback;
         internal static Action<GameSaveHolder> OnLevelLoadedCallback;
-
-
+        internal static Action<bool> OnGamePausedCallback;
+        internal static Action OnGameEndCallback;
+            
         internal static Action<LevelCompletedData> OnLevelCompletedCallback;
 
         #endregion
@@ -58,6 +59,8 @@ namespace Davanci
         {
             OnCardFlippedCallback += OnCardFlipped;
             OnGameStartedCallback += OnGameStarted;
+            OnGamePausedCallback += OnGamePaused;
+            OnGameEndCallback += OnGameEnd;
 
             CardComparer.m_OnCardsCompared += OnCardsCompared;
 
@@ -77,7 +80,7 @@ namespace Davanci
                 else
                 {
                     GameSave.DeleteSave();
-                    OnGameStopped();
+                    OnGameEnd();
                     CardsGenerator.Instance.InitCardsGenerator(LevelDimension);
                 }
             }
@@ -175,10 +178,12 @@ namespace Davanci
                 LevelCompletedData.MaxComboCount = MaxComboCount;
                 OnLevelCompletedCallback?.Invoke(LevelCompletedData);
                 IsGameStarted = false;
-                OnGameStopped();
+                OnGameEnd();
             }
         }
-        private void OnGameStopped()
+        private void OnGamePaused(bool state) => IsGameStarted = !state;
+
+        private void OnGameEnd()
         {
             TimeSinceStarted = 0;
             MatchCount = 0;
