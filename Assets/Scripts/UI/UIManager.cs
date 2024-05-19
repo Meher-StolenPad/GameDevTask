@@ -137,6 +137,17 @@ namespace Davanci
         public void OnPauseClicked()
         {
             GameManager.OnGamePausedCallback(true);
+            SoundState = SoundManager.SoundActivated;
+            if (SoundState)
+            {
+                EnabledSoundImage.gameObject.SetActive(true);
+                DisabledSoundImage.gameObject.SetActive(false);
+            }
+            else
+            {
+                EnabledSoundImage.gameObject.SetActive(false);
+                DisabledSoundImage.gameObject.SetActive(true);
+            }
             StartCoroutine(PausePanel.FadeIn(0.3f));
         }
         public void OnResumeClicked()

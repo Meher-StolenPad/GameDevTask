@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbcf124820e9e7540b7e82301367d507, type: 3}
   m_Name: Data
   m_EditorClassIdentifier: 
+  ShowCardsAtStart: 1
   Sprites:
   - {fileID: -258455080, guid: 7f373c34296e70d49a6ed9a93cb7783e, type: 3}
   - {fileID: -598892953, guid: 7f373c34296e70d49a6ed9a93cb7783e, type: 3}

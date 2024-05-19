@@ -14,13 +14,12 @@ namespace Davanci
     }
     public class SoundManager : SingletonMB<SoundManager>
     {
+        public static bool SoundActivated = true;
         public Pooler<SoundObjectRespawner> AudioSourcePool;
-
         public static Action<bool> OnSoundSateChangedCallback;
 
         private float VolumeChangeMultiplier = 0.15f;
         private float PitchChangeMultiplier = 0.1f;
-        private bool SoundActivated = true;
 
 
         private void Start()
