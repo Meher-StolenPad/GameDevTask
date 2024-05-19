@@ -146,6 +146,10 @@ namespace Davanci
             CalculateLayout();
             CreateCards(gameSaveHolder.cardSaves);
         }
+        public void ShowCards() => Cards.ForEach(card => card.ShowCard(false));
+
+        public void HideCards() => Cards.ForEach(card => card.HideCard());
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))

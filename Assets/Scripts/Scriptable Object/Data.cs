@@ -7,6 +7,7 @@ namespace Davanci
     public class Data : ScriptableObject
     {
         private const string FileName = "Data";
+        public bool ShowCardsAtStart;
 
         private static Data Instance;
         public static Data m_Instance

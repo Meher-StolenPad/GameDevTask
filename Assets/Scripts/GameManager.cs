@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -50,7 +51,7 @@ namespace Davanci
 
         private Vector2Int LevelDimension;
         private int MatchCountNeeded;
-
+        private bool ShowCardsAtStart;
         private LevelCompletedData LevelCompletedData;
 
         #endregion
@@ -68,6 +69,8 @@ namespace Davanci
         private void Start()
         {
             CalculateMatchNeeded();
+
+            ShowCardsAtStart = Database.GetShowCardsAtStart();
 
             //check if there's a save 
             if (GameSave.HasSave(out GameSaveHolder gameSaveHolder))
@@ -194,6 +197,28 @@ namespace Davanci
         }
         private void OnGameStarted()
         {
+            if (ShowCardsAtStart)
+            {
+                StartCoroutine(ShowCardsCoroutine());
+            }
+            else
+            {
+                IsGameStarted = true;
+            }
+        }
+        private IEnumerator ShowCardsCoroutine()
+        {
+            //show cards 
+            CardsGenerator.Instance.ShowCards();
+
+            float cellcount = LevelDimension.x * LevelDimension.y;
+
+            var waitTime = Mathf.Clamp(cellcount * 0.1f, 1f, 3f);
+
+            yield return new WaitForSeconds(waitTime);
+            //wait for hover time
+
+            CardsGenerator.Instance.HideCards();
             IsGameStarted = true;
         }
         private void Update()

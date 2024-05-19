@@ -18,6 +18,8 @@ namespace Davanci
             { 10, "D" },
             { 0,  "F" }
         };
+        public static bool GetShowCardsAtStart() => Data.m_Instance.ShowCardsAtStart;
+
         public static Sprite[] GetSprites(int cellsize)
         {
             if (cellsize == 0) return null;

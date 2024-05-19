@@ -86,17 +86,22 @@ namespace Davanci
             CanvasGroup.blocksRaycasts = false;
         }
 
-        internal void ShowCard()
+        internal void ShowCard(bool invokeCallback = true)
         {
             CardState = true;
-            GameManager.OnCardStartFlippingCallback?.Invoke();
+            if (m_IsCollected) return;
+
+            if (invokeCallback)
+                GameManager.OnCardStartFlippingCallback?.Invoke();
+
             CardHolder.DOLocalRotate(Vector3.up * 90f, 0.3f, RotateMode.Fast).OnComplete(() =>
             {
                 BackCardImage.gameObject.SetActive(false);
                 FaceCardImage.gameObject.SetActive(true);
                 CardHolder.DOLocalRotate(Vector3.up * 180f, 0.3f, RotateMode.Fast).OnComplete(() =>
                 {
-                    GameManager.OnCardFlippedCallback?.Invoke(this);
+                    if (invokeCallback)
+                        GameManager.OnCardFlippedCallback?.Invoke(this);
                 });
             });
         }
