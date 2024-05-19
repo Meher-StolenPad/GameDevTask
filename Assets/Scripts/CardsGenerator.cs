@@ -37,6 +37,8 @@ namespace Davanci
 
             GridLayout.cellSize = new Vector2(cellSize, cellSize);
             GridLayout.spacing = new Vector2(spacingX, spacingY);
+            DiscardPile.sizeDelta = new Vector2(cellSize, cellSize);
+
         }
         private void CreateCards(int rows, int columns)
         {
