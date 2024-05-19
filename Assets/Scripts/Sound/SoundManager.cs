@@ -26,7 +26,7 @@ namespace Davanci
         private void Start()
         {
             AudioSourcePool.Initialize(transform);
-            GameManager.OnCardFlippedCallback += OnCardFlipped;
+            GameManager.OnCardStartFlippingCallback += OnCardFlipped;
             GameManager.OnMoveCallback += OnTry;
             GameManager.OnLevelCompletedCallback += OnLevelCompleted;
             OnSoundSateChangedCallback += OnSoundStateChanged;
@@ -39,7 +39,7 @@ namespace Davanci
 
         private void OnDisable()
         {
-            GameManager.OnCardFlippedCallback -= OnCardFlipped;
+            GameManager.OnCardStartFlippingCallback -= OnCardFlipped;
             GameManager.OnMoveCallback -= OnTry;
             GameManager.OnLevelCompletedCallback -= OnLevelCompleted;
         }
@@ -53,7 +53,7 @@ namespace Davanci
             PlaySoundFxClip(Database.GetAudioClip(isMatch ? ClipFx.CardMatch : ClipFx.CardUnMatch));
         }
 
-        private void OnCardFlipped(Card obj)
+        private void OnCardFlipped()
         {
             PlaySoundFxClip(Database.GetAudioClip(ClipFx.CardFlipped));
         }

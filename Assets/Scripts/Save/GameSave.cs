@@ -58,9 +58,6 @@ namespace Davanci
         public static void OnCardsUpdated(int card1Index, int card2Index)   
         {
             if (GameSaveHolder.cardSaves.Count <= card1Index || GameSaveHolder.cardSaves.Count <= card2Index) return;
-
-            Debug.Log(card1Index + "% " + card2Index);
-
             GameSaveHolder.cardSaves[card1Index].Collected = true;
             GameSaveHolder.cardSaves[card2Index].Collected = true;
 
