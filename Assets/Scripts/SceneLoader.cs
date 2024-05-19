@@ -7,13 +7,15 @@ namespace Davanci
 {
     public class SceneLoader : SingletonMB<SceneLoader>
     {
-        [SerializeField] private CanvasGroup CanvasGroup;
+       private static CanvasGroup CanvasGroup;
 
         private bool IsLoadingScene;
         private int CurrentLevel;
 
         void Start()
         {
+            CanvasGroup = GetComponentInChildren<CanvasGroup>();
+
             if (GameSave.HasSave(out GameSaveHolder gameSaveHolder))
             {
                 CurrentLevel = gameSaveHolder.Level;
