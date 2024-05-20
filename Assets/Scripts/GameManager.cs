@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace Davanci
@@ -16,21 +15,21 @@ namespace Davanci
     public class GameManager : SingletonMB<GameManager>
     {
         private const float DelayBetweenCards = 0.1f;
-        private const int TimeToCheckForHint = 10;
-        private const int TimeBetweenHints = 3;
+        private const int TimeToCheckForHint = 20;
+        private const int TimeBetweenHints = 10;
 
         #region Callback Region
         internal static Action OnGameStartedCallback;
         internal static Action OnCardStartFlippingCallback;
         internal static Action<Card> OnCardFlippedCallback;
-        internal static Action<int> OnTickCallback; 
+        internal static Action<int> OnTickCallback;
         internal static Action<int, bool> OnMoveCallback;
         internal static Action<int> OnCardMatchedCallback;
         internal static Action<int, int> OnComboCallback;
         internal static Action<GameSaveHolder> OnLevelLoadedCallback;
         internal static Action<bool> OnGamePausedCallback;
         internal static Action OnGameEndCallback;
-            
+
         internal static Action<LevelCompletedData> OnLevelCompletedCallback;
 
         #endregion
@@ -117,7 +116,7 @@ namespace Davanci
                 MatchCountNeeded = (LevelDimension.x * LevelDimension.y) / 2;
             }
         }
-            
+
         private void OnCardFlipped(Card newCard)
         {
             CardComparer.OnCardFlipped(newCard);

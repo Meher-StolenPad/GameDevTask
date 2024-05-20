@@ -1,5 +1,3 @@
-using DG.Tweening;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -17,7 +15,7 @@ namespace Davanci
         [SerializeField] private TextMeshProUGUI ComboTextAnimation;
         [SerializeField] private Animator ComboTextAnimator;
         [Header("Start Panel")]
-        [SerializeField] private CanvasGroup TapToStartPanel;   
+        [SerializeField] private CanvasGroup TapToStartPanel;
 
         [Header("Level Completed Panel")]
         [SerializeField] private CanvasGroup LevelCompletedCanvasGroup;
@@ -27,7 +25,7 @@ namespace Davanci
         [SerializeField] private TextMeshProUGUI MaxComboText;
         [SerializeField] private TextMeshProUGUI GradeText;
         [SerializeField] private CanvasGroup LevelCompletedButtonsHolder;
-            
+
         [Header("Pause Panel")]
         [SerializeField] private CanvasGroup PausePanel;
         [SerializeField] private Image EnabledSoundImage;
@@ -52,11 +50,6 @@ namespace Davanci
             GameManager.OnLevelLoadedCallback -= OnLevelLoaded;
             GameManager.OnComboCallback -= OnCombo;
         }
-        private void OnDisable()
-        {
-          
-        }
-
 
         public void OnTapToStartClicked()
         {
@@ -122,7 +115,7 @@ namespace Davanci
         public void OnSoundButtonClicked(bool _state)
         {
             SoundState = _state;
-            if(SoundState)
+            if (SoundState)
             {
                 EnabledSoundImage.gameObject.SetActive(true);
                 DisabledSoundImage.gameObject.SetActive(false);
@@ -131,7 +124,7 @@ namespace Davanci
             {
                 EnabledSoundImage.gameObject.SetActive(false);
                 DisabledSoundImage.gameObject.SetActive(true);
-            }   
+            }
             SoundManager.OnSoundSateChangedCallback?.Invoke(SoundState);
         }
         public void OnPauseClicked()

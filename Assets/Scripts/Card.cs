@@ -1,6 +1,5 @@
-using DG.Tweening;
 using System;
-using System.Net;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -92,44 +91,68 @@ namespace Davanci
             CardState = true;
             if (m_IsCollected) return;
 
+            CardHolder.localEulerAngles = Vector3.zero;
+
             if (invokeCallback)
                 GameManager.OnCardStartFlippingCallback?.Invoke();
 
-            CardHolder.DOLocalRotate(Vector3.up * 90f, 0.3f, RotateMode.Fast).OnComplete(() =>
-            {
-                BackCardImage.gameObject.SetActive(false);
-                FaceCardImage.gameObject.SetActive(true);
-                CardHolder.DOLocalRotate(Vector3.up * 180f, 0.3f, RotateMode.Fast).OnComplete(() =>
-                {
-                    if (invokeCallback)
-                        GameManager.OnCardFlippedCallback?.Invoke(this);
-                });
-            });
+            StartCoroutine(FlipCardCoroutine(invokeCallback));
         }
 
+        private IEnumerator FlipCardCoroutine(bool invokeCallback)
+        {
+            const float flipDuration = 0.3f;
+
+            Vector3 originalRotation = CardHolder.localEulerAngles;
+            yield return CardHolder.RotateAsync(Vector3.zero, 90f, flipDuration);
+
+            BackCardImage.gameObject.SetActive(false);
+            FaceCardImage.gameObject.SetActive(true);
+
+            yield return CardHolder.RotateAsync(Vector3.up * 90f, -90f, flipDuration);
+
+            // Invoke the callback if required
+            if (invokeCallback)
+                GameManager.OnCardFlippedCallback?.Invoke(this);
+        }
         internal void HideCard()
         {
-            CardHolder.DOLocalRotate(Vector3.up * 90f, 0.3f, RotateMode.Fast).OnComplete(() =>
-            {
-                BackCardImage.gameObject.SetActive(true);
-                FaceCardImage.gameObject.SetActive(false);
-                CardHolder.DOLocalRotate(Vector3.zero, 0.3f, RotateMode.Fast).OnComplete(() =>
-                {
-                    CardState = false;
-                });
-            });
+            StartCoroutine(HideCardCoroutine());
+        }
+
+
+        private IEnumerator HideCardCoroutine()
+        {
+            const float flipDuration = 0.3f;
+            Vector3 originalRotation = CardHolder.localEulerAngles;
+
+            yield return CardHolder.RotateAsync(originalRotation, 90f, flipDuration);
+
+            BackCardImage.gameObject.SetActive(true);
+            FaceCardImage.gameObject.SetActive(false);
+
+            yield return CardHolder.RotateAsync(Vector3.up * 90f, -90f, flipDuration);
+
+            CardState = false;
         }
         internal void CollectCard(float delay = 0f)
         {
-            CardHolder.transform.SetParent(DiscardPile);
+            StartCoroutine(CollectCardCoroutine(delay));
+        }
 
-            CardHolder.DOLocalRotate(Vector3.forward * 360f, 0.5f, RotateMode.LocalAxisAdd).SetDelay(delay).SetEase(Ease.InBack);
-            CardHolder.DOAnchorPos(Vector2.zero, 0.5f).SetEase(Ease.InBack).SetDelay(delay).OnComplete(() =>
-            {
-                CanvasGroup.interactable = false;
-                CanvasGroup.blocksRaycasts = false;
-                HideCard();
-            });
+        private IEnumerator CollectCardCoroutine(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            CardHolder.SetParent(DiscardPile);
+
+            StartCoroutine(CardHolder.RotateAsync(360f, 0.5f));
+            yield return CardHolder.MoveAsync(Vector2.zero, 0.5f);
+
+            CanvasGroup.interactable = false;
+            CanvasGroup.blocksRaycasts = false;
+            HideCard();
+
             m_IsCollected = true;
         }
         internal void Hint()

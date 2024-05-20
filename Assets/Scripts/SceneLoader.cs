@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -38,8 +37,6 @@ namespace Davanci
 
             yield return StartCoroutine(FadeIn(0.5f));
 
-            DOTween.KillAll();
-
             SceneManager.LoadSceneAsync(Database.m_GameSceneIndex).completed += OnGameSceneLoaded;
         }
         internal void LoadLevelsMenuScene()
@@ -53,8 +50,6 @@ namespace Davanci
             IsLoadingScene = true;
 
             yield return StartCoroutine(FadeIn(0.5f));
-
-            DOTween.KillAll();
 
             SceneManager.LoadSceneAsync(Database.m_LevelsMenuSceneIndex).completed += OnLevelSelectionSceneLoaded;
         }
